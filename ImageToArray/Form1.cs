@@ -18,11 +18,13 @@ namespace ImageToArray
         OpenFileDialog dialog;
 		Bitmap SelectedImage;
 		RGBConvert ConvertFunc;
+		BackgroundWorker LoadWorker;
 
         public ImageToArray()
         {
             InitializeComponent();
 
+			pbProgress.Visible = false;
             dialog = new OpenFileDialog();
 			dialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
 
@@ -34,7 +36,47 @@ namespace ImageToArray
 			{
 				ConvertFunc = new RGBConvert(RGB888Convert);
 			}
-        }
+			LoadWorker = new BackgroundWorker();
+			LoadWorker.WorkerReportsProgress = true;
+			LoadWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ConvertImageComplete);
+			LoadWorker.DoWork += new DoWorkEventHandler(ConvertImage);
+			LoadWorker.ProgressChanged += new ProgressChangedEventHandler(UpdateProgressBar);
+		}
+
+		private void UpdateProgressBar(object obj, ProgressChangedEventArgs arg)
+		{
+			pbProgress.Value = arg.ProgressPercentage;
+		}
+
+		private void ConvertImage(object obj, DoWorkEventArgs arg)
+		{
+			StringBuilder builder = new StringBuilder(SelectedImage.Size.Width * SelectedImage.Size.Height * 20 + 100);
+			builder.Append( "그림 크기: " + SelectedImage.Size.Width.ToString() + " X "
+								+ SelectedImage.Size.Height.ToString() + "\n");
+			UInt16[] pixArr = new UInt16[SelectedImage.Size.Width * SelectedImage.Size.Height];
+
+			double total = SelectedImage.Size.Height * SelectedImage.Size.Width;
+			for (int y = 0; y < SelectedImage.Size.Height; y++)
+			{
+				for (int x = 0; x < SelectedImage.Size.Width; x++)
+				{
+					Color clr = SelectedImage.GetPixel(x, y);
+					pixArr[y*SelectedImage.Size.Width + x] = ConvertFunc(clr.R, clr.G, clr.B, chkSwap.Checked);
+					builder.Append( "0x" + pixArr[y * SelectedImage.Size.Width + x].ToString("X") + ", " );
+				}
+				LoadWorker.ReportProgress((int)(y * 100 / SelectedImage.Size.Height));
+			}
+			arg.Result = builder.ToString();
+		}
+
+		private void ConvertImageComplete(object obj, RunWorkerCompletedEventArgs arg)
+		{
+			rtbArrayCode.Text = (string)arg.Result;
+			MessageBox.Show("Conversion Complete!");
+
+			pbProgress.Visible = false;
+		}
+
 
         private void btnImageLoad_Click(object sender, EventArgs e)
         {
@@ -70,17 +112,8 @@ namespace ImageToArray
 			if (dialog.CheckFileExists == true)
 			{
 				rtbArrayCode.Clear();
-				string temp = "그림 크기: " + SelectedImage.Size.Width.ToString() + " X "
-									+ SelectedImage.Size.Height.ToString() + "\n";
-				for (int y = 0; y < SelectedImage.Size.Height; y++)
-				{
-					for (int x = 0; x < SelectedImage.Size.Width; x++)
-					{
-						Color clr = SelectedImage.GetPixel(x, y);
-						temp += "0x" + ConvertFunc(clr.R, clr.G, clr.B, chkSwap.Checked).ToString("X") + ", ";
-					}
-				}
-				rtbArrayCode.Text += temp;
+				pbProgress.Visible = true;
+				LoadWorker.RunWorkerAsync(null);
 			}
         }
 

@@ -18,22 +18,12 @@ namespace ImageToArray
         {
             InitializeComponent();
 			OpenBitmap = bitmap;
+			this.ClientSize = new Size(OpenBitmap.Width, OpenBitmap.Height);
 		}
 
         private void ShowImage_Paint(object sender, PaintEventArgs e)
         {
-//			e.Graphics.DrawImage(OpenBitmap, 10, 10);
-
-            Bitmap bitmap = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
-            for(int y=0; y<OpenBitmap.Height; y++)
-            {
-                for(int x=0; x<OpenBitmap.Width; x++)
-                {
-                    bitmap.SetPixel(x, y, OpenBitmap.GetPixel(x, y));
-                }
-            }
-            e.Graphics.DrawImage(bitmap, 10, 10);
-            this.Size = new Size(OpenBitmap.Width + 40, OpenBitmap.Height + 80);
+			e.Graphics.DrawImage(OpenBitmap, new Rectangle(0,0,OpenBitmap.Width, OpenBitmap.Height));
         }
     }
 }

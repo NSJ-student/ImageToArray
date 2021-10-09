@@ -39,22 +39,25 @@
 			this.rbNormalRGB = new System.Windows.Forms.RadioButton();
 			this.chkSwap = new System.Windows.Forms.CheckBox();
 			this.lblLine = new System.Windows.Forms.Label();
+			this.pbProgress = new System.Windows.Forms.ProgressBar();
 			this.SuspendLayout();
 			// 
 			// tbImagePath
 			// 
 			this.tbImagePath.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.tbImagePath.Location = new System.Drawing.Point(119, 17);
+			this.tbImagePath.Location = new System.Drawing.Point(136, 21);
+			this.tbImagePath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbImagePath.Name = "tbImagePath";
 			this.tbImagePath.ReadOnly = true;
-			this.tbImagePath.Size = new System.Drawing.Size(192, 14);
+			this.tbImagePath.Size = new System.Drawing.Size(219, 18);
 			this.tbImagePath.TabIndex = 0;
 			// 
 			// btnImageLoad
 			// 
-			this.btnImageLoad.Location = new System.Drawing.Point(12, 12);
+			this.btnImageLoad.Location = new System.Drawing.Point(14, 15);
+			this.btnImageLoad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.btnImageLoad.Name = "btnImageLoad";
-			this.btnImageLoad.Size = new System.Drawing.Size(101, 23);
+			this.btnImageLoad.Size = new System.Drawing.Size(115, 29);
 			this.btnImageLoad.TabIndex = 1;
 			this.btnImageLoad.Text = "Load Image";
 			this.btnImageLoad.UseVisualStyleBackColor = true;
@@ -62,18 +65,20 @@
 			// 
 			// rtbArrayCode
 			// 
-			this.rtbArrayCode.Location = new System.Drawing.Point(12, 70);
+			this.rtbArrayCode.Location = new System.Drawing.Point(14, 88);
+			this.rtbArrayCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rtbArrayCode.Name = "rtbArrayCode";
 			this.rtbArrayCode.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-			this.rtbArrayCode.Size = new System.Drawing.Size(299, 142);
+			this.rtbArrayCode.Size = new System.Drawing.Size(341, 176);
 			this.rtbArrayCode.TabIndex = 2;
 			this.rtbArrayCode.Text = "";
 			// 
 			// btnConvert
 			// 
-			this.btnConvert.Location = new System.Drawing.Point(12, 218);
+			this.btnConvert.Location = new System.Drawing.Point(14, 272);
+			this.btnConvert.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.btnConvert.Name = "btnConvert";
-			this.btnConvert.Size = new System.Drawing.Size(75, 23);
+			this.btnConvert.Size = new System.Drawing.Size(86, 29);
 			this.btnConvert.TabIndex = 3;
 			this.btnConvert.Text = "Convert";
 			this.btnConvert.UseVisualStyleBackColor = true;
@@ -81,9 +86,10 @@
 			// 
 			// btnShowImage
 			// 
-			this.btnShowImage.Location = new System.Drawing.Point(12, 41);
+			this.btnShowImage.Location = new System.Drawing.Point(14, 51);
+			this.btnShowImage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.btnShowImage.Name = "btnShowImage";
-			this.btnShowImage.Size = new System.Drawing.Size(101, 23);
+			this.btnShowImage.Size = new System.Drawing.Size(115, 29);
 			this.btnShowImage.TabIndex = 4;
 			this.btnShowImage.Text = "Show Image";
 			this.btnShowImage.UseVisualStyleBackColor = true;
@@ -91,9 +97,10 @@
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(236, 41);
+			this.btnSave.Location = new System.Drawing.Point(270, 51);
+			this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.btnSave.Name = "btnSave";
-			this.btnSave.Size = new System.Drawing.Size(75, 23);
+			this.btnSave.Size = new System.Drawing.Size(86, 29);
 			this.btnSave.TabIndex = 5;
 			this.btnSave.Text = "Save";
 			this.btnSave.UseVisualStyleBackColor = true;
@@ -101,18 +108,20 @@
 			// 
 			// tbSaveName
 			// 
-			this.tbSaveName.Location = new System.Drawing.Point(158, 43);
+			this.tbSaveName.Location = new System.Drawing.Point(136, 54);
+			this.tbSaveName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbSaveName.Name = "tbSaveName";
-			this.tbSaveName.Size = new System.Drawing.Size(72, 21);
+			this.tbSaveName.Size = new System.Drawing.Size(127, 25);
 			this.tbSaveName.TabIndex = 6;
 			// 
 			// rb565RGB
 			// 
 			this.rb565RGB.AutoSize = true;
 			this.rb565RGB.Checked = true;
-			this.rb565RGB.Location = new System.Drawing.Point(93, 221);
+			this.rb565RGB.Location = new System.Drawing.Point(106, 276);
+			this.rb565RGB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rb565RGB.Name = "rb565RGB";
-			this.rb565RGB.Size = new System.Drawing.Size(70, 16);
+			this.rb565RGB.Size = new System.Drawing.Size(88, 19);
 			this.rb565RGB.TabIndex = 7;
 			this.rb565RGB.TabStop = true;
 			this.rb565RGB.Text = "565 RGB";
@@ -122,9 +131,10 @@
 			// rbNormalRGB
 			// 
 			this.rbNormalRGB.AutoSize = true;
-			this.rbNormalRGB.Location = new System.Drawing.Point(169, 221);
+			this.rbNormalRGB.Location = new System.Drawing.Point(193, 276);
+			this.rbNormalRGB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rbNormalRGB.Name = "rbNormalRGB";
-			this.rbNormalRGB.Size = new System.Drawing.Size(70, 16);
+			this.rbNormalRGB.Size = new System.Drawing.Size(88, 19);
 			this.rbNormalRGB.TabIndex = 8;
 			this.rbNormalRGB.Text = "888 RGB";
 			this.rbNormalRGB.UseVisualStyleBackColor = true;
@@ -133,9 +143,10 @@
 			// chkSwap
 			// 
 			this.chkSwap.AutoSize = true;
-			this.chkSwap.Location = new System.Drawing.Point(255, 221);
+			this.chkSwap.Location = new System.Drawing.Point(291, 276);
+			this.chkSwap.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.chkSwap.Name = "chkSwap";
-			this.chkSwap.Size = new System.Drawing.Size(56, 16);
+			this.chkSwap.Size = new System.Drawing.Size(65, 19);
 			this.chkSwap.TabIndex = 9;
 			this.chkSwap.Text = "Swap";
 			this.chkSwap.UseVisualStyleBackColor = true;
@@ -143,17 +154,25 @@
 			// lblLine
 			// 
 			this.lblLine.AutoSize = true;
-			this.lblLine.Location = new System.Drawing.Point(238, 223);
+			this.lblLine.Location = new System.Drawing.Point(272, 279);
 			this.lblLine.Name = "lblLine";
-			this.lblLine.Size = new System.Drawing.Size(11, 12);
+			this.lblLine.Size = new System.Drawing.Size(14, 15);
 			this.lblLine.TabIndex = 10;
 			this.lblLine.Text = "|";
 			// 
+			// pbProgress
+			// 
+			this.pbProgress.Location = new System.Drawing.Point(136, 54);
+			this.pbProgress.Name = "pbProgress";
+			this.pbProgress.Size = new System.Drawing.Size(127, 25);
+			this.pbProgress.TabIndex = 11;
+			// 
 			// ImageToArray
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(323, 250);
+			this.ClientSize = new System.Drawing.Size(369, 312);
+			this.Controls.Add(this.pbProgress);
 			this.Controls.Add(this.lblLine);
 			this.Controls.Add(this.chkSwap);
 			this.Controls.Add(this.rbNormalRGB);
@@ -166,6 +185,7 @@
 			this.Controls.Add(this.btnImageLoad);
 			this.Controls.Add(this.tbImagePath);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
 			this.Name = "ImageToArray";
 			this.Text = "ImageToArray";
@@ -187,6 +207,7 @@
 		private System.Windows.Forms.RadioButton rbNormalRGB;
 		private System.Windows.Forms.CheckBox chkSwap;
 		private System.Windows.Forms.Label lblLine;
+		private System.Windows.Forms.ProgressBar pbProgress;
     }
 }
 
