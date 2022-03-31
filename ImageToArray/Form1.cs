@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +26,7 @@ namespace ImageToArray
 
 			pbProgress.Visible = false;
             dialog = new OpenFileDialog();
-			dialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
+			dialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png|VGD Files(*.vgd)|*.vgd";
 
 			if (rb565RGB.Checked)
 			{
@@ -85,9 +85,58 @@ namespace ImageToArray
             if(result == DialogResult.OK)
             {
                 tbImagePath.Text = dialog.FileName;
-				SelectedImage = new Bitmap(dialog.FileName);
+				string ext = Path.GetExtension(dialog.FileName);
+				if (ext == ".vgd")
+                {
+					SelectedImage = VgdToBitmap(dialog.FileName);
+
+				}
+				else
+				{
+					SelectedImage = new Bitmap(dialog.FileName);
+				}
             }
         }
+		private Bitmap VgdToBitmap(string fileName)
+		{
+			FileStream file = File.OpenRead(fileName);
+			BinaryReader reader = new BinaryReader(file);
+			if(file.Length - 784 < 3840 * 2160 * 4)
+            {
+				return new Bitmap(640, 480);
+			}
+
+			Bitmap result = new Bitmap(3840, 2160);
+
+			byte[] buffer = new byte[3840 * 2160 * 4];
+			reader.Read(buffer, 0, 784);
+			int readByte = reader.Read(buffer, 0, 3840 * 2160 * 4);
+			if(readByte < 3840 * 2160 * 4)
+			{
+				return result;
+            }
+
+			for (int y = 0; y < 2160; y++)
+			{
+				for (int x = 0; x < 3840; x++)
+				{
+					int index = x * y * 4;
+					/*
+					int r = buffer[index+3]+ (buffer[index + 2]<<8)&0x03;
+					int g = (buffer[index+2]>>2) + (buffer[index + 1]<<6)&0x0F;
+					int b = (buffer[index + 1] >> 4) & 0x0F + (buffer[index+0]<<4);
+					*/
+					int r = buffer[index + 3];
+					int g = buffer[index + 2];
+					int b = buffer[index + 1];
+					System.Drawing.Color pixCol = Color.FromArgb(r, g, b);
+
+					result.SetPixel(x, y, pixCol);
+				}
+			}
+
+			return result;
+		}
 
 		private UInt16 RGB565Convert(int red, int green, int blue, bool swap)
 		{
@@ -190,5 +239,6 @@ namespace ImageToArray
                 ConvertFunc = new RGBConvert(RGB565Convert);
 			}
 		}
-    }
+    
+	}
 }
